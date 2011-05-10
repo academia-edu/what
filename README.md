@@ -29,3 +29,9 @@ implement a `health` method, which returns `:ok`, `:warning`, or `:alert`.
 They can also implement a `details` method, which returns the hash
 that's included in the HTTP response. See the included `What::Modules::Base`
 and `What::Modules::Unicorn` classes for the implementation details.
+
+### What's the plan?
+
+Eventually, it should be possible to write a What module which monitors other
+What servers across an entire deployment, pulling together all relevant
+information into one JSON object.
