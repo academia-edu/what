@@ -9,10 +9,11 @@ Gem::Specification.new do |s|
   s.authors     = ["Ryan Lower", "Ryan Fitzgerald"]
   s.email       = ["team@academia.edu"]
   s.homepage    = "http://academia.edu/"
-  s.summary     = %q{Modular server monitoring with JSON endpoint}
-  s.description = %q{What runs a Thin server which returns a JSON object representing
-the state of services running on a machine. It currently only includes a
-module for monitoring Unicorn workers, but it's easy to add custom modules.}
+  s.summary     = %q{Simple server monitoring tool}
+  s.description = "What uses WEBrick to serve a JSON object representing the" +
+                  "state of services running on a machine. It currently only" +
+                  "includes a module for monitoring Unicorn workers, but" +
+                  "it's easy to add custom modules."
 
   s.rubyforge_project = "what"
 
@@ -21,6 +22,6 @@ module for monitoring Unicorn workers, but it's easy to add custom modules.}
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_dependency("thin")
+  s.add_dependency("rack", "~1.1")
   s.add_dependency("json")
 end

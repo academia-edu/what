@@ -1,6 +1,8 @@
 What? A simple server monitoring tool.
 ======================================
 
+![WHAT !](http://i.imgur.com/f6lrv.png)
+
 What is a modular, easily-extensible server monitoring tool which is still in
 the early stages of development.
 

@@ -3,7 +3,8 @@ end
 
 require 'json'
 require 'yaml'
-require 'thin'
+require 'webrick'
+require 'rack'
 
 require 'what/version'
 require 'what/helpers'

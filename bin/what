@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'optparse'
+require 'webrick'
+require 'rack'
 require 'what'
 
 opts = OptionParser.new do |opts|
@@ -22,7 +24,4 @@ unless What::Config.loaded?
   exit
 end
 
-Thin::Server.start('0.0.0.0', 9428) do
-  run What::Server.new
-end
-
+Rack::Handler::WEBrick.run(What::Server.new, :Port => 9428)
