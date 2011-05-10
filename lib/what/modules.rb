@@ -4,7 +4,7 @@ module What::Modules
   def self.load_all
     require 'what/modules/base'
 
-    globs = ['what/modules/*.rb']
+    globs = [File.join(File.dirname(__FILE__), 'modules', '*.rb')]
 
     if What::Config['module_paths']
       What::Config['module_paths'].each do |module_path|
