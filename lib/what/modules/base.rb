@@ -1,6 +1,6 @@
 class What::Modules::Base
   def initialize
-    @config = What::Config[self.name]
+    @config = What::Config['module_config'] && What::Config['module_config'][self.name]
   end
 
   def name
@@ -8,7 +8,6 @@ class What::Modules::Base
   end
 
   def check!
-    raise "Module #{self.class.name} doesn't override 'check!'"
   end
 
   def status
@@ -23,4 +22,3 @@ class What::Modules::Base
     {}
   end
 end
-

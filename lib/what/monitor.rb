@@ -1,4 +1,5 @@
 class What::Monitor
+  # don't worry, these method names are ironic
   def self.go!
     @modules = What::Config['modules'].map do |m|
       name = What::Helpers.camelize(m)
