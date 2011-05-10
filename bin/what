@@ -22,7 +22,7 @@ unless What::Config.loaded?
   exit
 end
 
-Thin::Server.start('0.0.0.0', 8164) do
+Thin::Server.start('0.0.0.0', 9428) do
   run What::Server.new
 end
 
