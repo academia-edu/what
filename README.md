@@ -1,7 +1,14 @@
 What? A simple server monitoring tool.
 ======================================
 
-What is still in the early stages of development.
+What is a modular, easily-extensible server monitoring tool which is still in
+the early stages of development.
+
+### What do I install?
+
+    $ gem install what
+
+### What does it do?
 
 Right now, the example config file monitors Unicorn workers. Observe:
 
