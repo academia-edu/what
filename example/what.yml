@@ -1,0 +1,27 @@
+# Config file for the What monitoring system.
+
+### Set the polling interval for all services.
+interval: 10
+
+### Specify paths containing custom modules to load, relative to this file.
+# module_paths:
+# - modules
+
+### List all modules to be monitored.
+modules:
+- unicorn
+# - ram
+# - redis
+# - dir
+# - whatever
+
+### Pass parameters into modules.
+# module_config:
+#   ram:
+#     min: nil
+#   dir:
+#     path: '/mnt/datastore'
+
+### Specify any other config files to load.
+# configs:
+# - more_config/stuff.yml

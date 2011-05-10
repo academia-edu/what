@@ -1,0 +1,28 @@
+require 'rubygems'
+require 'optparse'
+require 'what'
+
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: what [options]"
+  opts.separator ""
+
+  opts.on('-c', '--config FILE', 'Specify the location of the YAML config file.') do |fn|
+    What::Config.load(fn)
+  end
+
+  opts.on_tail('-h', '--help', 'Show this message.') do
+    puts opts
+    exit
+  end
+end
+opts.parse!(ARGV)
+
+unless What::Config.loaded?
+  puts opts
+  exit
+end
+
+Thin::Server.start('0.0.0.0', 8164) do
+  run What::Server.new
+end
+
