@@ -10,17 +10,13 @@ interval: 10
 ### List all modules to be monitored.
 modules:
 - unicorn
-# - ram
-# - redis
-# - dir
-# - whatever
 
 ### Pass parameters into modules.
-# module_config:
-#   ram:
-#     min: nil
-#   dir:
-#     path: '/mnt/datastore'
+module_config:
+  unicorn:
+    # minimum number of workers before warning and alert statuses
+    warning: 1
+    alert: 0
 
 ### Specify any other config files to load.
 # configs:

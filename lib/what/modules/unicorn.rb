@@ -9,8 +9,10 @@ class What::Modules::Unicorn < What::Modules::Base
   end
 
   def health
-    if @unicorns.count > 0
+    if @unicorns.count > @config['warning']
       :ok
+    elsif @unicorns.count > @config['alert']
+      :warning
     else
       :alert
     end
