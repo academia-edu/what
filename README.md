@@ -1,7 +1,7 @@
 What? A simple server monitoring tool.
 ======================================
 
-![WHAT !](http://i.imgur.com/f6lrv.png)
+![WHAT !](http://rwfitzge.github.com/what.png)
 
 What is a modular, easily-extensible server monitoring tool which is still in
 the early stages of development.
