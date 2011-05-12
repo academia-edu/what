@@ -7,8 +7,8 @@ class What::Server
   def call(_)
     [
       What::Status[:health] != :alert ? 200 : 503,
-      {'Content-Type' => 'application/json'},
-      JSON.unparse(What::Status.all) + "\n"
+      {'Content-Type' => What::Config.formatter.mime},
+      What::Config.formatter.format(What::Status.all)
     ]
   end
 end

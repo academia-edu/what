@@ -8,6 +8,7 @@ require 'rack'
 
 require 'what/version'
 require 'what/helpers'
+require 'what/formatters'
 require 'what/config'
 require 'what/status'
 require 'what/modules'

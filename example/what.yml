@@ -1,5 +1,8 @@
 # Config file for the What monitoring system.
 
+### Choose between JSON and YAML formatting. (default: json)
+formatter: yaml
+
 ### Set the polling interval for all services.
 interval: 10
 
