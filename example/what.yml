@@ -13,6 +13,7 @@ interval: 10
 ### List all modules to be monitored.
 modules:
 - unicorn
+#- processes
 
 ### Pass parameters into modules.
 module_config:
@@ -20,6 +21,10 @@ module_config:
     # minimum number of workers before warning and alert statuses
     warning: 1
     alert: 0
+#  processes:
+#    postgres: postgres
+#    beanstalkd: beanstalkd
+#    redis: redis-server
 
 ### Specify any other config files to load.
 # configs:

@@ -1,5 +1,8 @@
 class What::Modules::Unicorn < What::Modules::Base
-  @unicorns = []
+  def initialize
+    super
+    @unicorns = []
+  end
 
   def check!
     @unicorns = `ps aux`.split("\n").grep(/unicorn_rails worker/).map do |ln|
