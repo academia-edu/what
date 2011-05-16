@@ -40,15 +40,4 @@ class What::Config
   def self.all
     @config
   end
-
-  def self.formatter
-    @formatter ||= case @config['formatter']
-                   when 'json'
-                     What::JsonFormatter.new
-                   when 'yaml'
-                     What::YamlFormatter.new
-                   else
-                     What::JsonFormatter.new
-                   end
-  end
 end
