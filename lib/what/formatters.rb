@@ -6,9 +6,9 @@ module What::Formatters
 
     globs = [File.join(File.dirname(__FILE__), 'formatters', '*.rb')]
 
-    if What::Config['formatter_paths']
-      What::Config['formatter_paths'].each do |formatter_path|
-        globs << File.join(What::Config['base'], formatter_path, '*.rb')
+    if Config['formatter_paths']
+      Config['formatter_paths'].each do |formatter_path|
+        globs << File.join(Config['base'], formatter_path, '*.rb')
       end
     end
 
@@ -18,6 +18,6 @@ module What::Formatters
       end
     end
 
-    What::Formatter.use(What::Config['formatter'])
+    Formatter.use(Config['formatter'])
   end
 end

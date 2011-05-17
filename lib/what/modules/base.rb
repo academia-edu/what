@@ -1,10 +1,10 @@
 class What::Modules::Base
   def initialize
-    @config = What::Config['module_config'] && What::Config['module_config'][self.name]
+    @config = Config['module_config'] && Config['module_config'][self.name]
   end
 
   def name
-    What::Helpers.underscore(self.class.name.split('::').last)
+    Helpers.underscore(self.class.name.split('::').last)
   end
 
   def check!

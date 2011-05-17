@@ -1,15 +1,15 @@
 class What::Server
   def initialize
-    What::Modules.load_all
-    What::Formatters.load_all
-    What::Monitor.go!
+    Modules.load_all
+    Formatters.load_all
+    Monitor.go!
   end
 
   def call(_)
     [
-      What::Status[:health] != :alert ? 200 : 503,
-      {'Content-Type' => What::Formatter.mime},
-      What::Formatter.format(What::Status.all)
+      Status[:health] != :alert ? 200 : 503,
+      {'Content-Type' => Formatter.mime},
+      Formatter.format(Status.all)
     ]
   end
 end

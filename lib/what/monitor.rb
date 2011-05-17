@@ -1,9 +1,9 @@
 class What::Monitor
   # don't worry, these method names are ironic
   def self.go!
-    @modules = What::Config['modules'].map do |m|
-      name = What::Helpers.camelize(m)
-      What::Modules.const_get(name).new
+    @modules = Config['modules'].map do |m|
+      name = Helpers.camelize(m)
+      Modules.const_get(name).new
     end
 
     Thread.abort_on_exception = true
@@ -16,10 +16,10 @@ class What::Monitor
       modules.each do |mod|
         mod.check!
         healths << mod.health
-        What::Status[mod.name] = mod.status
+        Status[mod.name] = mod.status
       end
-      What::Status[:health] = What::Helpers.overall_health(healths)
-      sleep What::Config['interval']
+      Status[:health] = Helpers.overall_health(healths)
+      sleep Config['interval']
     end
   end
 end

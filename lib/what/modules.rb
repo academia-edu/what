@@ -6,9 +6,9 @@ module What::Modules
 
     globs = [File.join(File.dirname(__FILE__), 'modules', '*.rb')]
 
-    if What::Config['module_paths']
-      What::Config['module_paths'].each do |module_path|
-        globs << File.join(What::Config['base'], module_path, '*.rb')
+    if Config['module_paths']
+      Config['module_paths'].each do |module_path|
+        globs << File.join(Config['base'], module_path, '*.rb')
       end
     end
 
