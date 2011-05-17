@@ -1,4 +1,9 @@
 class What::Config
+  DEFAULTS = {
+    'interval'  => 10,
+    'formatter' => 'json'
+  }
+
   @config = {}
 
   def self.load(fn)
@@ -7,7 +12,7 @@ class What::Config
   end
 
   def self.load_primary(fn)
-    @config = YAML.load_file(fn)
+    @config = DEFAULTS.merge(YAML.load_file(fn))
     @config['base'] ||= File.expand_path(File.dirname(fn))
     @loaded = true
   end
@@ -16,12 +21,17 @@ class What::Config
     return if !fns
 
     fns.each do |fn|
-      path = if fn.match(/^\//)
+      path = if fn.match(%r(^/))
                fn
              else
                File.join(@config['base'], fn)
              end
-      @config.merge!(YAML.load_file(path))
+      begin
+        opts = YAML.load_file(path)
+        @config.merge!(opts)
+      rescue Exception => e
+        puts "Error loading config file #{path}: #{e}"
+      end
     end
   end
 

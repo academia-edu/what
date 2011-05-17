@@ -3,8 +3,8 @@
 ### Choose between JSON and YAML formatting. (default: json)
 formatter: yaml
 
-### Set the polling interval for all services.
-interval: 10
+### Set the polling interval for all services, in seconds. (default: 10)
+# interval: 10
 
 ### Specify paths containing custom modules to load, relative to this file.
 # module_paths:

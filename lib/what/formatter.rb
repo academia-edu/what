@@ -6,7 +6,7 @@ class What::Formatter
                  when 'yaml'
                    What::Formatters::YAML.new
                  else
-                   What::Formatters::JSON.new
+                   raise "Unknown formatter #{name}"
                  end
   end
 

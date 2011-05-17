@@ -12,19 +12,13 @@ class What::Monitor
 
   def self.do_it(modules)
     loop do
-      overall = :ok
+      healths = []
       modules.each do |mod|
         mod.check!
-        case mod.health
-          when :ok
-          when :warning
-            overall = :warning if overall != :alert
-          else
-            overall = :alert
-        end
+        healths << mod.health
         What::Status[mod.name] = mod.status
       end
-      What::Status[:health] = overall
+      What::Status[:health] = What::Helpers.overall_health(healths)
       sleep What::Config['interval']
     end
   end
