@@ -4,18 +4,23 @@ module What::Modules
   def self.load_all
     require 'what/modules/base'
 
-    globs = [File.join(File.dirname(__FILE__), 'modules', '*.rb')]
+    default_modules_path = File.join(File.dirname(__FILE__), 'modules')
+    require_dir(included_modules_path)
 
-    if Config['module_paths']
-      Config['module_paths'].each do |module_path|
-        globs << File.join(Config['base'], module_path, '*.rb')
-      end
+    Config['module_paths'].each do |module_path|
+      path = if module_path.match(%r(^/))
+               module_path
+             else
+               File.join(Config['base'], module_path)
+             end
+      require_dir(path)
     end
+  end
 
-    globs.each do |glob|
-      Dir[glob].each do |fn|
+  private
+    def require_dir(path)
+      Dir[File.join(path, '*.rb')].each do |fn|
         require fn
       end
     end
-  end
 end

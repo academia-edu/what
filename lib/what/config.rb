@@ -1,7 +1,11 @@
 class What::Config
   DEFAULTS = {
-    'interval'  => 10,
-    'formatter' => 'json'
+    'interval'      => 10,
+    'formatter'     => 'json',
+    'configs'       => [],
+    'module_paths'  => [],
+    'modules'       => [],
+    'module_config' => {}
   }
 
   @config = {}

@@ -1,6 +1,8 @@
 class What::Modules::Base
+  DEFAULTS = {}
+
   def initialize
-    @config = Config['module_config'] && Config['module_config'][self.name]
+    @config = DEFAULTS.merge(Config['module_config'][self.name] || {})
   end
 
   def name

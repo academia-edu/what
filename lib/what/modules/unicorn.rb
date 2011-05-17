@@ -1,4 +1,9 @@
 class What::Modules::Unicorn < What::Modules::Base
+  DEFAULTS = {
+    'warning' => 1,
+    'alert'   => 0
+  }
+
   def initialize
     super
     @unicorns = []
