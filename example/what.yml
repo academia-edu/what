@@ -4,7 +4,7 @@
 formatter: json
 
 ### Set the polling interval for all services, in seconds. (default: 10)
-# interval: 10
+interval: 10
 
 ### Specify paths containing custom modules to load, relative to this file.
 module_paths:
@@ -16,6 +16,7 @@ modules:
 #- processes
 #- unicorn
 #- what
+#- existence
 
 ### Pass parameters into modules.
 module_config:
@@ -31,7 +32,10 @@ module_config:
 #    warning: 1
 #    alert: 0
 #  what:
-#    some_server: server.com
+#    some_host: somehost.com
+#  existence:
+#    paths:
+#      - /mnt/a_drive
 
 ### Specify any other config files to load.
 # configs:
