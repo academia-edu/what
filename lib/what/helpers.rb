@@ -33,5 +33,13 @@ module What
       word.downcase!
       word
     end
+
+    def self.curl(uri)
+      curl = Curl::Easy.new(uri)
+      curl.on_complete do |easy|
+        yield(easy.body_str)
+      end
+      curl.perform
+    end
   end
 end

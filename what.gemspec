@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency("rack", ">= 1.1.2")
   s.add_dependency("json")
+  s.add_dependency("curb")
 end
