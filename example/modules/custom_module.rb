@@ -27,13 +27,13 @@ class What::Modules::CustomModule < What::Modules::Base
   # The health and details methods are called whenever the server receives
   # an HTTP request.
 
-  # health should return one of the following symbols:
-  #   :ok         Everything's fine.
-  #   :warning    There's a problem, but it's not critical.
-  #   :alert      I need to get out of bed to fix this.
+  # health should return one of the following strings:
+  #   'ok'        Everything's fine.
+  #   'warning'   There's a problem, but it's not critical.
+  #   'alert'     I need to get out of bed to fix this.
   # (mandatory)
   def health
-    :ok
+    'ok'
   end
 
   # details can return a hash containing any additional information
@@ -47,6 +47,6 @@ class What::Modules::CustomModule < What::Modules::Base
     @hellos.times do
       greeting << @config['world']
     end
-    {:greeting => greeting.join(' ') + '!'}
+    {'greeting' => greeting.join(' ') + '!'}
   end
 end

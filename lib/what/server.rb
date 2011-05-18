@@ -8,7 +8,7 @@ module What
 
     def call(_)
       [
-        Status[:health] != :alert ? 200 : 503,
+        Status['health'] != 'alert' ? 200 : 503,
         {'Content-Type' => Formatter.mime},
         Formatter.format(Status.all)
       ]

@@ -12,7 +12,7 @@ module What
       @config.each do |name, regexp|
         @processes[name] = `ps aux`.split("\n").grep(regexp).map do |ln|
                              ln =~ /^\w+\s+(\d+).*(\d+:\d\d(?:\.\d\d)?) (.*)$/
-                             {:pid => $1, :cpu_time => $2, :proctitle => $3.strip}
+                             {'pid' => $1, 'cpu_time' => $2, 'proctitle' => $3.strip}
                            end
       end
     end
@@ -24,7 +24,7 @@ module What
           all_ok = false
         end
       end
-      all_ok ? :ok : :alert
+      all_ok ? 'ok' : 'alert'
     end
 
     def details

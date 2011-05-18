@@ -16,7 +16,7 @@ module What
     end
 
     def status
-      { :health => health }.merge(details)
+      {'health' => health}.merge(details)
     end
 
     def health

@@ -16,7 +16,7 @@ module What
     end
 
     def health
-      Helpers.overall_health(@whats.map { |_, attrs| attrs[:health] })
+      Helpers.overall_health(@whats.map { |_, attrs| attrs['health'] })
     end
 
     def details

@@ -13,22 +13,22 @@ module What
     def check!
       @unicorns = `ps aux`.split("\n").grep(/unicorn_rails worker/).map do |ln|
                     ln =~ /^\w+\s+(\d+).*(\d+:\d\d(?:\.\d\d)?) unicorn/
-                    {:pid => $1, :cpu_time => $2}
+                    {'pid' => $1, 'cpu_time' => $2}
                   end
     end
 
     def health
       if @unicorns.count > @config['warning']
-        :ok
+        'ok'
       elsif @unicorns.count > @config['alert']
-        :warning
+        'warning'
       else
-        :alert
+        'alert'
       end
     end
 
     def details
-      {:workers => @unicorns.count, :details => @unicorns}
+      {'workers' => @unicorns.count, 'details' => @unicorns}
     end
   end
 end

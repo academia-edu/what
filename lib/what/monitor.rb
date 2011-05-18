@@ -19,7 +19,7 @@ module What
           healths << mod.health
           Status[mod.name] = mod.status
         end
-        Status[:health] = Helpers.overall_health(healths)
+        Status['health'] = Helpers.overall_health(healths)
         sleep Config['interval']
       end
     end

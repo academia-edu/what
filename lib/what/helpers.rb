@@ -3,14 +3,14 @@ module What
     # Take an array of healths and determine overall health, on
     # the principle that overall health == the worst sub-health.
     def self.overall_health(healths)
-      healths.reduce(:ok) do |overall, current|
+      healths.reduce('ok') do |overall, current|
         case current
-        when :ok
+        when 'ok'
           overall
-        when :warning
-          :warning if overall != :alert
+        when 'warning'
+          'warning' if overall != 'alert'
         else
-          :alert
+          'alert'
         end
       end
     end
