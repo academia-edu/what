@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'rubygems'
 require 'optparse'
 require 'webrick'
@@ -10,6 +12,11 @@ opts = OptionParser.new do |opts|
 
   opts.on('-c', '--config FILE', 'Specify the location of the YAML config file.') do |fn|
     What::Config.load(fn)
+  end
+
+  opts.on_tail('-v', '--version', 'Show the version number.') do
+    puts What::VERSION
+    exit
   end
 
   opts.on_tail('-h', '--help', 'Show this message.') do
