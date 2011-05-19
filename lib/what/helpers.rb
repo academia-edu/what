@@ -35,11 +35,7 @@ module What
     end
 
     def self.curl(uri)
-      curl = Curl::Easy.new(uri)
-      curl.on_complete do |easy|
-        yield(easy.body_str)
-      end
-      curl.perform
+      yield(Excon.get(uri).body)
     end
   end
 end

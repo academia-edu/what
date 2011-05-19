@@ -5,7 +5,7 @@ require 'json'
 require 'yaml'
 require 'webrick'
 require 'rack'
-require 'curl'
+require 'excon'
 
 require 'what/config'
 require 'what/formatter'
