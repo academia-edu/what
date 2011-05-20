@@ -13,6 +13,7 @@ module_paths:
 ### List all modules to be monitored.
 modules:
 - custom_module
+#- disk
 #- processes
 #- unicorn
 #- what
@@ -23,6 +24,14 @@ module_config:
   custom_module:
     hello: world
     world: hello
+#  disk:
+#    # percentage of disk space filled
+#    "/$":
+#      warning: 70%
+#      alert: 80%
+#    "/Volumes/BOOTCAMP":
+#      warning: 80%
+#      alert: 90%
 #  processes:
 #    postgres: postgres
 #    beanstalkd: beanstalkd
