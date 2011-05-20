@@ -1,7 +1,8 @@
 module What
   class Formatters::YAML < Formatters::Base
     def mime
-      'application/x-yaml'
+      #'application/x-yaml'
+      'text/plain'
     end
 
     def format(hash)
