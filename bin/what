@@ -31,4 +31,4 @@ unless What::Config.loaded?
   exit
 end
 
-Rack::Handler::WEBrick.run(What::Server.new, :Port => 9428)
+Rack::Handler::WEBrick.run(What::Server.new, :Port => What::Config['port'] || 9428)
