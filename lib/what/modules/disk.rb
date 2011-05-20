@@ -5,8 +5,8 @@ module What
       @config.each do |name, config|
         if config.is_a?(Hash)
           @config[name] = {
-            'warning' => @config['warning'].to_i,
-            'alert'   => @config['alert'].to_i
+            'warning' => config['warning'].to_i,
+            'alert'   => config['alert'].to_i
           }
         else
           @config[name] = {
