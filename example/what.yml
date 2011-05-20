@@ -6,6 +6,10 @@ formatter: json
 ### Set the polling interval for all services, in seconds. (default: 10)
 interval: 10
 
+### Set an optional token that must be provided as a query string to retrieve
+### status via HTTP.
+# secret_token: il1k3tUr7l3z
+
 ### Specify paths containing custom modules to load, relative to this file.
 module_paths:
 - modules
