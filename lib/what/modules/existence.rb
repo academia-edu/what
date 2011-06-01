@@ -4,8 +4,7 @@ module What
       'paths' => []
     }
 
-    def initialize
-      super
+    def initialize_module
       @paths = {}
     end
 

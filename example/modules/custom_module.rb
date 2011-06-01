@@ -8,12 +8,10 @@ class What::Modules::CustomModule < What::Modules::Base
     'world' => 'world'
   }
 
-  # You can use the initialize method to set up any data structures you'll be
-  # using. If you do write an initialize, make sure to call super to populate
-  # the @config object.
+  # You can use the initialize_module method to set up any data structures
+  # you'll be using.
   # (optional)
-  def initialize
-    super
+  def initialize_module
     @hellos = 1
   end
 

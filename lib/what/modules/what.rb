@@ -1,8 +1,7 @@
 # This module assumes the other servers are using the JSON formatter.
 module What
   class Modules::What < Modules::Base
-    def initialize
-      super
+    def initialize_module
       @config.each do |name, host|
         @config[name] = "http://#{host}:9428"
       end

@@ -5,8 +5,7 @@ module What
       'formatter'     => 'json',
       'configs'       => [],
       'module_paths'  => [],
-      'modules'       => [],
-      'module_config' => {}
+      'modules'       => []
     }
 
     @config = {}

@@ -1,55 +1,60 @@
 # Config file for the What monitoring system.
 
-### Choose between JSON and YAML formatting. (default: json)
-formatter: json
+# Choose between JSON and YAML formatting.
+#formatter: json
 
-### Set the polling interval for all services, in seconds. (default: 10)
-interval: 10
+# Set the polling interval for all services, in seconds.
+#interval: 10
 
-### Set an optional token that must be provided as a query string to retrieve
-### status via HTTP.
-# secret_token: il1k3tUr7l3z
+# Set an optional token that must be provided as a query string to retrieve
+# status via HTTP.
+#secret_token: il1k3tUr7l3z
 
-### Specify paths containing custom modules to load, relative to this file.
+# Specify paths containing custom modules to load, relative to this file.
 module_paths:
 - modules
 
-### List all modules to be monitored.
+# List all modules to run.
 modules:
-- custom_module
-#- disk
-#- processes
-#- unicorn
-#- what
-#- existence
-
-### Pass parameters into modules.
-module_config:
-  custom_module:
+- name: unicorn
+  type: unicorn
+  config:
+    warning: 1
+    alert: 0
+- name: hello world
+  type: custom_module
+  config:
+    hello: hello
+    world: world
+- name: world hello
+  type: custom_module
+  config:
     hello: world
     world: hello
-#  disk:
-#    # percentage of disk space filled
-#    "/$":
-#      warning: 70%
-#      alert: 80%
-#    "/Volumes/BOOTCAMP":
-#      warning: 80%
-#      alert: 90%
-#  processes:
-#    postgres: postgres
-#    beanstalkd: beanstalkd
-#    redis: redis-server
-#  unicorn:
-#    # minimum number of workers before warning and alert statuses
-#    warning: 1
-#    alert: 0
-#  what:
-#    some_host: somehost.com
-#  existence:
+#- name: Macintosh HD
+#  type: disk
+#- name: Boot Camp
+#  type: disk
+#  config:
+#    regexp: "/Volumes/BOOTCAMP"
+#- name: postgres
+#  type: process
+#- name: beanstalk
+#  type: process
+#  config:
+#    regexp: beanstalkd
+#- name: redis
+#  type: process
+#  config:
+#    regexp: redis-server
+#- type: existence
+#  config:
 #    paths:
-#      - /mnt/a_drive
+#    - /mnt/a_drive
+#- type: what
+#  config:
+#    some_host: somehost.com
 
-### Specify any other config files to load.
-# configs:
-# - more_config/stuff.yml
+# Specify any other config files to load.
+#configs:
+#- more_config/stuff.yml

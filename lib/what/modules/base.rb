@@ -1,11 +1,14 @@
 module What
   class Modules::Base
-    def initialize
-      @config = if defined?(DEFAULTS)
-                  DEFAULTS.merge(Config['module_config'][self.name] || {})
-                else
-                  Config['module_config'][self.name]
-                end
+    def initialize(params={})
+      defaults = (self.class)::DEFAULTS rescue {}
+      @name = params['name']
+      @config = defaults.merge(params['config'] || {})
+      @max = params['max'] || 'alert'
+      initialize_module
+    end
+
+    def initialize_module
     end
 
     def name
@@ -16,7 +19,18 @@ module What
     end
 
     def status
-      {'health' => health}.merge(details)
+      status = {}
+      status['name'] = @name if @name
+      status['type'] = name # FIXME
+      status['health'] = if @max == 'ok' || health == 'ok'
+                           'ok'
+                         elsif @max == 'warning' || health == 'warning'
+                           'warning'
+                         else
+                           'alert'
+                         end
+      status['details'] = details
+      status
     end
 
     def health

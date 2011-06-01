@@ -5,8 +5,7 @@ module What
       'alert'   => 0
     }
 
-    def initialize
-      super
+    def initialize_module
       @unicorns = []
     end
 
