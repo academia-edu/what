@@ -8,12 +8,12 @@ module What
 
     def call(env)
       if Config['secret_token'] && Config['secret_token'] != env['QUERY_STRING']
-        [403, {'Content-Type' => 'text/plain'}, "403 Forbidden\n"]
+        [403, {'Content-Type' => 'text/plain'}, ["403 Forbidden\n"]]
       else
         [
           Status['health'] != 'alert' ? 200 : 503,
           {'Content-Type' => Formatter.mime},
-          Formatter.format(Status.all)
+          [Formatter.format(Status.all)]
         ]
       end
     end
