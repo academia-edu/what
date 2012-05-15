@@ -8,18 +8,29 @@ module What
       end
 
       Thread.abort_on_exception = true
-      @thread = Thread.new(@modules) { |modules| self.do_it(modules) }
+      @threads = @modules.collect do |mod|
+        Thread.new do
+          loop do
+            mod.check!
+            Thread.current[:status] = mod.status
+            sleep Config['interval']
+          end
+        end
+      end
+
+      Thread.new { self.do_it }
     end
 
-    def self.do_it(modules)
+    def self.do_it
       Status['details'] = []
       loop do
         statuses = []
         healths = []
-        modules.each do |mod|
-          mod.check!
-          healths << mod.status['health']
-          statuses << mod.status
+        @threads.each do |th|
+          if th[:status]
+            healths << th[:status]['health']
+            statuses << th[:status]
+          end
         end
         Status['health'] = Helpers.overall_health(healths)
         Status['details'] = statuses
