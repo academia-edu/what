@@ -1,10 +1,16 @@
 module What
   class Modules::Base
+
+    attr_reader :interval
+
     def initialize(params={})
       defaults = (self.class)::DEFAULTS rescue {}
       @name = params['name']
       @config = defaults.merge(params['config'] || {})
       @max = params['max'] || 'alert'
+      # Use global interval setting if not set on a
+      # per module basis
+      @interval = params['interval'] || Config['interval']
       initialize_module
     end
 
