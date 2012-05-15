@@ -23,11 +23,13 @@ modules:
     alert: 0
 - name: hello world
   type: custom_module
+  interval: 1
   config:
     hello: hello
     world: world
 - name: world hello
   type: custom_module
+  interval: 5
   config:
     hello: world
     world: hello
