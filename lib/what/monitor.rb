@@ -13,7 +13,7 @@ module What
           loop do
             mod.check!
             Thread.current[:status] = mod.status
-            sleep Config['interval']
+            sleep mod.interval
           end
         end
       end
