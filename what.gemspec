@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = What::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ryan Fitzgerald", "Ryan Lower"]
-  s.email       = ["team@academia.edu"]
+  s.email       = ["rwfitzge@gmail.com", "rpjlower@gmail.com"]
   s.homepage    = "http://academia.edu/"
   s.summary     = %q{Simple server monitoring tool}
   s.description = <<-EOS
