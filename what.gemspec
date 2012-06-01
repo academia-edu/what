@@ -24,6 +24,6 @@ EOS
   s.require_paths = ["lib"]
 
   s.add_dependency("rack", ">= 1.1.2")
-  s.add_dependency("excon", "~> 0.6.1")
+  s.add_dependency("excon", "~> 0.13.4")
   s.add_dependency("json")
 end
