@@ -31,4 +31,7 @@ unless What::Config.loaded?
   exit
 end
 
+trap(:TERM) { exit! }
+trap(:INT)  { exit! }
+
 Rack::Handler::WEBrick.run(What::Server.new, :Port => What::Config['port'] || 9428)
