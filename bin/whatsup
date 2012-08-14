@@ -2,7 +2,6 @@
 
 require 'rubygems'
 require 'optparse'
-$:.unshift './lib' ##@@ remove
 require 'what/version'
 require 'what/cli'
 
