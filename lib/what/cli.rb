@@ -45,8 +45,8 @@ module What
 
     def print_status(status)
       sections_to_show = self.sections_to_show
-      if !@opts.hide || sections_to_show.any?{|s| status[s[1]].size > 0}
-        puts status['host']
+      if !@opts.hide || sections_to_show.any?{|s| status[s[1]].size > 0} || (status['health'] == 'unknown')
+        puts "#{status['host']} | #{status['health'].upcase}"
         puts
         sections_to_show.each do |s|
           print_status_section(s[1], status[s[1]])
