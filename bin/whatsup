@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'optparse'
 require 'what/version'
-require 'what/cli'
+require 'what/sup'
 
 options = Struct.new(:oks, :warnings, :alerts, :servers, :hide).new
 options.alerts = true
@@ -46,5 +46,4 @@ opts = OptionParser.new do |opts|
 end
 opts.parse!(ARGV)
 
-What::CLI.run(options)
-
+What::Sup.run(options)
