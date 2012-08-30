@@ -1,8 +1,10 @@
 require 'net/http'
 require 'json'
 
+## Impletments the whatsup CLI for querying what servers
+
 module What
-  class CLI
+  class Sup
 
     LEVELS = ['unknown', 'ok', 'warning', 'alert']
 
@@ -20,7 +22,7 @@ module What
                  end
     end
 
-    ##@@ TODO: Make this multi threaded
+    ##@@ TODO: Make this multi-threaded
     def fetch_statuses
       @servers.each do |s|
         @statuses << self.fetch_status(*s.split(':'))
