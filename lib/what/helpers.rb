@@ -2,11 +2,13 @@ module What
   module Helpers
     # Take an array of healths and determine overall health, on
     # the principle that overall health == the worst sub-health.
-    HEALTH = ['ok', 'warning', 'alert']
+    HEALTH = %w(ok warning alert)
     def self.overall_health(healths)
-      # Assume that a nil/weird health is something to investigate (alert)
-      overall = healths.map{|h| HEALTH.index(h)}.map{|i| i.nil? ? 2 : i}.max
-      HEALTH[overall]
+      worst_health = healths.map do |health|
+        HEALTH.index(health) || HEALTH.index('alert')
+      end.max
+
+      HEALTH[worst_health]
     end
 
     # Stolen from Rails (http://api.rubyonrails.org/classes/ActiveSupport/Inflector.html)
