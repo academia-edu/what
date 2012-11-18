@@ -8,6 +8,9 @@ module What
         HEALTH.index(health) || HEALTH.index('alert')
       end.max
 
+      # No news is good news.
+      worst_health ||= HEALTH.index('ok')
+
       HEALTH[worst_health]
     end
 
