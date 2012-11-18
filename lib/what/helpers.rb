@@ -8,10 +8,10 @@ module What
         HEALTH.index(health) || HEALTH.index('alert')
       end.max
 
-      # No news is good news.
-      worst_health ||= HEALTH.index('ok')
-
-      HEALTH[worst_health]
+      # No news is null news.
+      if worst_health
+        HEALTH[worst_health]
+      end
     end
 
     # Stolen from Rails (http://api.rubyonrails.org/classes/ActiveSupport/Inflector.html)
