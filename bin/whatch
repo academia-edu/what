@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+$:.unshift './lib'
+
+require 'rubygems'
+require 'optparse'
+require 'what/version'
+require 'what/ch'
+
+options = Struct.new(:interval).new
+
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: what [options] module_name1 [ module_name2 ... ]"
+  opts.separator ""
+
+  opts.on_tail('-v', '--version', 'Show the version number.') do
+    puts What::VERSION
+    exit
+  end
+
+  opts.on_tail('-h', '--help', 'Show this message.') do
+    puts opts
+    exit
+  end
+
+  opts.on('-n', '--interval SECS', 'Run module check every SECS seconds.') do |secs|
+    options.interval = secs
+  end
+end
+opts.parse!(ARGV)
+
+What::Ch.run(ARGV, options)
