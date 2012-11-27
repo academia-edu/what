@@ -1,3 +1,6 @@
+
+require 'yaml'
+
 module What
   class Config
     DEFAULTS = {
@@ -11,12 +14,17 @@ module What
     @config = {}
 
     def self.load(fn)
+      set_defaults
       load_primary(fn)
       load_secondary(@config['configs'])
     end
 
+    def self.set_defaults
+      @config = DEFAULTS
+    end
+
     def self.load_primary(fn)
-      @config = DEFAULTS.merge(YAML.load_file(fn))
+      @config.merge!(YAML.load_file(fn))
       @config['base'] ||= File.expand_path(File.dirname(fn))
       @loaded = true
     end
