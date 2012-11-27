@@ -1,12 +1,20 @@
+
+require 'what/modules'
+require 'what/helpers'
+
 module What
   class Monitor
+
     # don't worry, these method names are ironic
-    def self.go!
-      @modules = Config['modules'].map do |mod|
+
+    def initialize(modules)
+      @modules = modules.map do |mod|
         name = Helpers.camelize(mod.delete('type'))
         Modules.const_get(name).new(mod)
       end
+    end
 
+    def go!
       Thread.abort_on_exception = true
       @threads = @modules.collect do |mod|
         Thread.new do
@@ -17,12 +25,9 @@ module What
           end
         end
       end
-
-      Thread.new { self.do_it }
     end
 
-    def self.do_it
-      Status['details'] = []
+    def do_it(interval)
       loop do
         statuses = []
         healths = []
@@ -32,10 +37,21 @@ module What
             statuses << th[:status]
           end
         end
-        Status['health'] = Helpers.overall_health(healths)
-        Status['details'] = statuses
-        sleep Config['interval']
+        yield Helpers.overall_health(healths), statuses
+        sleep interval
       end
     end
+
+    def self.go!
+      monitor = new Config['modules']
+      monitor.go!
+      Thread.new do 
+        monitor.do_it(Config['interval']) do |health, statuses|
+          Status['health'] = health
+          Status['details'] = statuses          
+        end
+      end
+    end
+
   end
 end
