@@ -1,13 +1,11 @@
 #!/usr/bin/env ruby
 
-$:.unshift './lib'
-
 require 'rubygems'
 require 'optparse'
 require 'what/version'
 require 'what/ch'
 
-options = Struct.new(:interval).new
+options = Struct.new(:interval, :all).new
 
 opts = OptionParser.new do |opts|
   opts.banner = "Usage: what [options] module_name1 [ module_name2 ... ]"
@@ -23,9 +21,18 @@ opts = OptionParser.new do |opts|
     exit
   end
 
+  opts.on('-c', '--config FILE', 'Specify the location of the YAML config file.') do |fn|
+    What::Config.load(fn)
+  end
+
   opts.on('-n', '--interval SECS', 'Run module check every SECS seconds.') do |secs|
     options.interval = secs
   end
+
+  opts.on_tail('-a', '--all', 'Load all modules specified in config option (which must be present too).') do
+    options.all = true
+  end
+
 end
 opts.parse!(ARGV)
 
