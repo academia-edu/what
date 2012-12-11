@@ -45,7 +45,9 @@ module What
         free = line.match(/(\d+)\D+?free/)[1].to_i
         [used + free, free]
       else
-        `cat /proc/meminfo`.split("\n")[0..1].map{|line| line.match(/(\d+)/)[1].to_i}
+        lines = `cat /proc/meminfo`.split("\n")[0...4]
+        total, free, buffers, cache = lines.map { |l| l[/\d+/].to_i }
+        [total, free - buffers + cache]
       end
     end
 
