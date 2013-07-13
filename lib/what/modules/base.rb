@@ -11,6 +11,7 @@ module What
       @max = params['max'] || 'alert'
       @interval = params['interval'] || Config['interval']
       @output = output
+      @failures = 0
       initialize_module
     end
 
@@ -27,10 +28,14 @@ module What
       end
     rescue Exception => e
       # stop looping -- the Monitor will restart if necessary
-      @output[identifier] = shared_status.merge(
+      @failures += 1
+      output = shared_status.merge(
         "health" => "alert",
-        "error" => "#{e.class}: #{e.message}"
+        "error" => "#{e.class}: #{e.message}",
+        "failures" => @failures
       )
+      puts "Error in module:\n#{YAML.dump(output)}"
+      @output[identifier] = output
     end
 
     def name

@@ -17,7 +17,6 @@ module What
           class: klass,
           config_hash: config_hash,
           module: instance,
-          failures: 0,
           id: instance.identifier
         }
       end
@@ -36,15 +35,8 @@ module What
         healths << status['health']
         statuses << status
 
-        if status["error"]
-          status["failures"] = mod[:failures]
-
-          puts "Error in module:\n#{YAML.dump(status)}"
-
-          if mod[:failures] < 6
-            mod[:failures] += 1
-            mod[:module].async.start_monitoring
-          end
+        if status["error"] && status["failures"] < 6
+          mod[:module].async.start_monitoring
         end
       end
 
