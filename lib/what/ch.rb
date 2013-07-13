@@ -25,15 +25,15 @@ module What
                      What::Config['modules']
                    else
                      What::Config['modules'].select{|m| module_names.include?(m['name'])}
-                   end          
+                   end
                  else
                    What::Config.set_defaults
                    module_names.uniq.map{|mn| {'type' => mn, 'name' => mn} }
                  end
-      
+
       if 0 == @modules.size
         self.error "No modules to use"
-      end      
+      end
 
       @interval = (opts.interval || 10).to_i
     end

@@ -1,57 +1,52 @@
-
-require 'what/modules'
-require 'what/helpers'
-
 module What
   class Monitor
-
-    # don't worry, these method names are ironic
-
-    def initialize(modules)
-      @modules = modules.map do |mod|
-        name = Helpers.camelize(mod.delete('type'))
-        Modules.const_get(name).new(mod)
-      end
-    end
-
+    # don't worry, this method name is ironic
     def go!
-      Thread.abort_on_exception = true
-      @threads = @modules.collect do |mod|
-        Thread.new do
-          loop do
-            mod.check!
-            Thread.current[:status] = mod.status
-            sleep mod.interval
+      # For now, use a hash as the centralized collection point for data. We
+      # can't use a method on the module because Celluloid will block that call
+      # until after whatever method is currently running, which could be
+      # unacceptably slow. We could use a fancy thread-safe data structure
+      # instead of a hash, but the GIL means hash assignment and reading are
+      # safe as long as we're on MRI.
+      @results = {}
+      @modules = Config['modules'].map do |config_hash|
+        name     = Helpers.camelize(config_hash.delete('type'))
+        klass    = Modules.const_get(name)
+        instance = klass.new(config_hash, @results)
+        {
+          class: klass,
+          config_hash: config_hash,
+          module: instance,
+          failures: 0,
+          id: instance.identifier
+        }
+      end
+
+      @modules.each do |mod|
+        mod[:module].async.start_monitoring
+      end
+    end
+
+    def status
+      statuses = []
+      healths = []
+
+      @modules.each do |mod|
+        status = @results[mod[:id]] || {"health" => nil}
+        healths << status['health']
+        statuses << status
+
+        if status["error"]
+          status["failures"] = mod[:failures]
+
+          if mod[:failures] < 6
+            mod[:failures] += 1
+            mod[:module].async.start_monitoring
           end
         end
       end
-    end
 
-    def do_it(interval)
-      loop do
-        statuses = []
-        healths = []
-        @threads.each do |th|
-          if th[:status]
-            healths << th[:status]['health']
-            statuses << th[:status]
-          end
-        end
-        yield Helpers.overall_health(healths), statuses
-        sleep interval
-      end
+      {"health" => Helpers.overall_health(healths), "details" => statuses}
     end
-
-    def self.go!
-      monitor = new Config['modules']
-      monitor.go!
-      Thread.new do 
-        monitor.do_it(Config['interval']) do |health, statuses|
-          Status['health'] = health
-          Status['details'] = statuses          
-        end
-      end
-    end
-
   end
 end

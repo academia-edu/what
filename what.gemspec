@@ -26,4 +26,5 @@ EOS
   s.add_dependency("rack", ">= 1.1.2")
   s.add_dependency("excon", "~> 0.13.4")
   s.add_dependency("json")
+  s.add_dependency("celluloid")
 end
