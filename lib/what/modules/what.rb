@@ -8,7 +8,7 @@ module What
       @whats = {}
     end
 
-    def check!
+    def check
       @config.map do |name, uri|
         Helpers.curl(uri) { |body| @whats[name] = JSON.parse(body) rescue nil }
       end

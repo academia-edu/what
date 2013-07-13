@@ -8,7 +8,7 @@ module What
       @paths = {}
     end
 
-    def check!
+    def check
       @config['paths'].each do |path|
         if Dir[path].count == 0
           @paths[path] = false

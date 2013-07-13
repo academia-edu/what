@@ -10,7 +10,7 @@ module What
       @regexp = Regexp.new(@config['regexp'])
     end
 
-    def check!
+    def check
       line = `df -h`.split("\n").grep(@regexp).first
       @info = if line
                 fields = line.split(/\s+/)

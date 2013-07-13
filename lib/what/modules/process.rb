@@ -5,7 +5,7 @@ module What
       @processes = []
     end
 
-    def check!
+    def check
       @processes = `ps aux`.split("\n").grep(@regexp).map do |ln|
                      ln =~ /^\w+\s+(\d+).*(\d+:\d\d(?:\.\d\d)?) (.*)$/
                      {'pid' => $1, 'cpu_time' => $2, 'proctitle' => $3.strip}

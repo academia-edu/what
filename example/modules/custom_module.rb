@@ -15,10 +15,10 @@ class What::Modules::CustomModule < What::Modules::Base
     @hellos = 1
   end
 
-  # The check! method is called every Config['interval'] seconds. It should
+  # The check method is called every Config['interval'] seconds. It should
   # collect whatever information is needed and put it into instance vars.
   # (optional)
-  def check!
+  def check
     @hellos = Kernel.rand(4) + 1
   end
 

@@ -5,7 +5,7 @@ module What
       'alert'   => '90%'
     }
 
-    def check!
+    def check
       fields = self.memory_details
       @info = if fields.size == 2
                 {

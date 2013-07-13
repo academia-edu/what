@@ -23,7 +23,7 @@ module What
       @output[identifier] = nil
 
       loop do
-        check!
+        check
         @output[identifier] = status
         sleep interval
       end
@@ -45,7 +45,11 @@ module What
       object_id
     end
 
-    def check!
+    # This method should be overridden. The implementation here is for
+    # backwards compatibility with older modules that implement check!
+    # instead of check.
+    def check
+      check!
     end
 
     def status
