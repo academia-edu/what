@@ -1,8 +1,6 @@
 module What
 end
 
-require 'pry'
-
 require 'json'
 require 'yaml'
 require 'webrick'
