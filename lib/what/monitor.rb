@@ -39,6 +39,8 @@ module What
         if status["error"]
           status["failures"] = mod[:failures]
 
+          puts "Error in module:\n#{YAML.dump(status)}"
+
           if mod[:failures] < 6
             mod[:failures] += 1
             mod[:module].async.start_monitoring
