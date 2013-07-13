@@ -9,8 +9,6 @@ module What
       @name = params['name']
       @config = defaults.merge(params['config'] || {})
       @max = params['max'] || 'alert'
-      # Use global interval setting if not set on a
-      # per module basis
       @interval = params['interval'] || Config['interval']
       @output = output
       initialize_module
@@ -28,7 +26,7 @@ module What
         sleep interval
       end
     rescue Exception => e
-      # stop looping -- the server will restart if necessary
+      # stop looping -- the Monitor will restart if necessary
       @output[identifier] = shared_status.merge(
         "health" => "alert",
         "error" => "#{e.class}: #{e.message}"
@@ -52,6 +50,17 @@ module What
       check!
     end
 
+    # This method must be overridden.
+    def health
+      raise "Module #{self.class.name} doesn't override 'health'"
+    end
+
+    # This method may be overridden, to provide extra details based on the
+    # results of the check.
+    def details
+      {}
+    end
+
     def status
       status = shared_status
       status['health'] = if @max == 'ok' || health == 'ok'
@@ -63,14 +72,6 @@ module What
                          end
       status['details'] = details
       status
-    end
-
-    def health
-      raise "Module #{self.class.name} doesn't override 'health'"
-    end
-
-    def details
-      {}
     end
 
     def shared_status

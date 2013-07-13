@@ -32,9 +32,5 @@ module What
       word.downcase!
       word
     end
-
-    def self.curl(uri)
-      yield(Excon.get(uri).body)
-    end
   end
 end

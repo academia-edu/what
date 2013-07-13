@@ -5,7 +5,7 @@ require 'json'
 require 'yaml'
 require 'webrick'
 require 'rack'
-require 'excon'
+require 'open-uri'
 require 'celluloid'
 
 require 'what/config'

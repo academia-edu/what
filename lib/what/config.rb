@@ -1,6 +1,3 @@
-
-require 'yaml'
-
 module What
   class Config
     DEFAULTS = {

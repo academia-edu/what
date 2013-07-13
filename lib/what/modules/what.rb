@@ -10,7 +10,8 @@ module What
 
     def check
       @config.map do |name, uri|
-        Helpers.curl(uri) { |body| @whats[name] = JSON.parse(body) rescue nil }
+        body = open(uri).read
+        @whats[name] = JSON.parse(body) rescue nil
       end
     end
 
