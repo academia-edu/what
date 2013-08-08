@@ -36,5 +36,10 @@ module What
     def self.curl(uri)
       yield(open(uri).read)
     end
+
+    # Performs a simple strip of invalid UTF-8 characters on the output of 'ps aux'
+    def self.process_lines
+      `ps aux`.encode('UTF-16', invalid: :replace, undef: :replace).encode('UTF-8').split("\n")
+    end
   end
 end
