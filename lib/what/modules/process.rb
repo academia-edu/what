@@ -6,7 +6,7 @@ module What
     end
 
     def check
-      @processes = Helper.process_lines.grep(@regexp).map do |ln|
+      @processes = Helpers.process_lines.grep(@regexp).map do |ln|
                      ln =~ /^\w+\s+(\d+).*(\d+:\d\d(?:\.\d\d)?) (.*)$/
                      {'pid' => $1, 'cpu_time' => $2, 'proctitle' => $3.strip}
                    end
