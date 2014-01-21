@@ -37,6 +37,11 @@ module What
                end
         begin
           opts = YAML.load_file(path)
+
+          # Special-case modules--we want to append, not overwrite
+          @config['modules'] ||= []
+          @config['modules'] += Array(opts.delete('modules'))
+
           @config.merge!(opts)
         rescue Exception => e
           puts "Error loading config file #{path}: #{e}"
