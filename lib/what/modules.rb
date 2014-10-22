@@ -17,6 +17,8 @@ module What
       end
     end
 
+    # TODO: Load modules in the correct order (i.e., superclasses before
+    # subclasses).
     def self.require_dir(path)
       Dir[File.join(path, '*.rb')].each do |fn|
         require fn
