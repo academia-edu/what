@@ -4,14 +4,15 @@ module What
     # the principle that overall health == the worst sub-health.
     HEALTH = %w(ok warning alert)
     def self.overall_health(healths)
-      worst_health = healths.map do |health|
-        HEALTH.index(health) || HEALTH.index('alert')
-      end.max
+      worst_health(healths)
+    end
 
-      # No news is null news.
-      if worst_health
-        HEALTH[worst_health]
-      end
+    def self.worst_health(healths)
+      ordered_healths(healths).last
+    end
+
+    def self.best_health(healths)
+      ordered_healths(healths).first
     end
 
     # Stolen from Rails (http://api.rubyonrails.org/classes/ActiveSupport/Inflector.html)
@@ -41,5 +42,14 @@ module What
     def self.process_lines
       `ps aux`.encode('UTF-16', invalid: :replace, undef: :replace).encode('UTF-8').split("\n")
     end
+
+    private
+
+    def self.ordered_healths(healths)
+      healths.sort_by do |health|
+        HEALTH.index(health) || HEALTH.index('alert')
+      end
+    end
+
   end
 end
