@@ -14,10 +14,15 @@ module What
       resp = Net::HTTP.get_response(@url)
       @status = resp.code.to_i
       @body = resp.body.strip
+      @got_response = true
+    rescue Net::ReadTimeout => e
+      @got_response = false
     end
 
     def health
-      if @status != 200
+      if !@got_response
+        'alert'
+      elsif @status != 200
         'alert'
       elsif @expect && @expect != @body
         'alert'
@@ -27,7 +32,11 @@ module What
     end
 
     def details
-      { 'status' => @status, 'last_response' => @body[0..200] }
+      {
+        'status' => @status,
+        'last_response' => @body[0..200],
+        'got_response' => @got_response
+      }
     end
   end
 end
