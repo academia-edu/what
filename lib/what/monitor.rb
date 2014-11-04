@@ -35,7 +35,7 @@ module What
         healths << status['health']
         statuses << status
 
-        if status["error"] && status["failures"] < 6
+        if status["error"]
           mod[:module].async.start_monitoring
         end
       end
