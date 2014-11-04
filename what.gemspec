@@ -25,5 +25,5 @@ EOS
 
   s.add_dependency("rack", ">= 1.1.2")
   s.add_dependency("json")
-  s.add_dependency("celluloid")
+  s.add_dependency("celluloid", ">= 0.16.0)
 end
