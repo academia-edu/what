@@ -1,11 +1,12 @@
 module What
   class Config
     DEFAULTS = {
-      'interval'      => 10,
-      'formatter'     => 'json',
-      'configs'       => [],
-      'module_paths'  => [],
-      'modules'       => []
+      'interval'              => 10,
+      'formatter'             => 'json',
+      'configs'               => [],
+      'config_fragment_dir'   => '/etc/what/conf.d',
+      'module_paths'          => [],
+      'modules'               => []
     }
 
     @config = {}
@@ -14,7 +15,7 @@ module What
       set_defaults
       load_primary(fn)
       load_secondary(@config['configs'])
-      load_secondary(Dir.glob('/etc/what/conf.d/*'))
+      load_secondary(Dir.glob("#{@config['config_fragment_dir']}/*.yml"))
     end
 
     def self.set_defaults
