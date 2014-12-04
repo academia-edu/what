@@ -14,6 +14,7 @@ module What
       set_defaults
       load_primary(fn)
       load_secondary(@config['configs'])
+      load_secondary(Dir.glob('/etc/what/conf.d/*'))
     end
 
     def self.set_defaults
